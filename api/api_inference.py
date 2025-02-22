@@ -7,22 +7,12 @@ from tqdm import tqdm
 from openai import OpenAI
 import argparse
 
-sys.path.append('/home/xyf/paper/longtail_know/utils')
+sys.path.append('./utils')
 from prompt_lib import *
 
 # 定义客户端池，每个线程使用不同的账号
 clients = [
-    OpenAI(api_key="sk-e6c43f7d18b14bd78c1bc7490ac015cf", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-2e4c194ea6d548d398f8ac3927ca84a9", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-7648a8acaafb43e1a60e4adfe78a1f0e", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-c35d0b539d81446e82ba1b323dc6e3e4", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-f6fe81fd11d44018b6669b3657df77a6", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-7fd7a42d5685426b92318fe7f98c738a", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-960debd2de8b41f7904c048031f0ec52", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-e8215ffc9f8f4d1dbd41e6baf6ba03e6", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-136aea61526147cc9e0cae37de842fbc", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-4efaa8ce0b114ec8ae2c420bcfe20ad6", base_url="https://api.deepseek.com"),
-    OpenAI(api_key="sk-aa23463ba30d4c91bbf6455422b3ec00", base_url="https://api.deepseek.com"),
+    OpenAI(api_key="", base_url="https://api.deepseek.com")
 ]
 
 def deepseek_check_answer(data):
@@ -42,7 +32,7 @@ entities = set()
 return_list = []
 write_lock = Lock()  # 用于保护写入操作的锁
 
-INPUT_FILE = "/home/xyf/paper/ranking_decoding/output/Meta-Llama-3-8B-Instruct/squad/llama3_honest_plustemp_0.8_n_40_squad_test.json"
+INPUT_FILE = "./output/Meta-Llama-3-8B-Instruct/squad/llama3_honest_plustemp_0.8_n_40_squad_test.json"
 OUTPUT_FILE = INPUT_FILE.replace(".json", "_deepseek.json")
 
 # 读取输入数据
